@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+cdk.out/
+.aws/
+*.egg-info/
+dist/
+.pytest_cache/
