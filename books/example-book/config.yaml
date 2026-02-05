@@ -1,0 +1,13 @@
+# Book metadata (optional - defaults will be used if not provided)
+book:
+  title: "Example Book Title"
+  author: "Your Name"
+  
+  metadata:
+    description: "Book description for KDP listing"
+    keywords:
+      - "keyword1"
+      - "keyword2"
+    categories:
+      - "Category1"
+    price: "9.99"

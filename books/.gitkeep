@@ -1,0 +1,14 @@
+# Books folder structure
+# 
+# Each book should have its own folder:
+#
+#   books/
+#     my-book/
+#       manuscript.md    <- Your content (required)
+#       cover.png        <- Your cover image (required, supports .jpg/.jpeg/.webp)
+#       config.yaml      <- Book metadata (optional)
+#
+# Usage:
+#   python merge.py --book books/my-book
+#
+# Output will be in output/my-book/
