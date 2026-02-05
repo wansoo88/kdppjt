@@ -35,8 +35,13 @@ class MockLLMBackend(LLMBackend):
         
         prompt_lower = prompt.lower()
         
-        # Check for image prompts first (more specific)
-        if "image" in prompt_lower and ("prompt" in prompt_lower or "dall-e" in prompt_lower):
+        # Check for coloring book
+        if "coloring book" in prompt_lower and "page ideas" in prompt_lower:
+            response = self._generate_coloring_pages()
+        elif "coloring book" in prompt_lower and "prompt" in prompt_lower:
+            response = self._generate_coloring_prompts()
+        # Check for image prompts (more specific)
+        elif "image" in prompt_lower and ("prompt" in prompt_lower or "dall-e" in prompt_lower):
             response = self._generate_image_prompts()
         elif "edit" in prompt_lower and "polish" not in prompt_lower:
             response = self._generate_edited_story()
@@ -51,6 +56,80 @@ class MockLLMBackend(LLMBackend):
         
         self._output_tokens += len(response.split()) * 2
         return response
+    
+    def _generate_coloring_pages(self) -> str:
+        return '''{
+  "title": "Coloring Book for Nurses: Relaxation & Self-Care",
+  "pages": [
+    {"page": 1, "title": "Healing Hands", "description": "Intricate design of caring hands with floral patterns", "type": "pattern"},
+    {"page": 2, "title": "Stethoscope Mandala", "description": "Mandala design incorporating stethoscope and medical symbols", "type": "mandala"},
+    {"page": 3, "title": "Coffee Break", "description": "Cozy scene of coffee cup with steam swirls and pastries", "type": "scene"},
+    {"page": 4, "title": "You Are Appreciated", "description": "Inspirational quote with decorative lettering and flowers", "type": "quote"},
+    {"page": 5, "title": "Night Shift Stars", "description": "Peaceful night sky with moon and stars pattern", "type": "pattern"},
+    {"page": 6, "title": "Scrubs & Flowers", "description": "Nurse scrubs decorated with botanical flower patterns", "type": "scene"},
+    {"page": 7, "title": "Heart Monitor Art", "description": "Creative heartbeat line transforming into flowers", "type": "pattern"},
+    {"page": 8, "title": "Self-Care Sunday", "description": "Relaxing bath scene with candles and plants", "type": "scene"},
+    {"page": 9, "title": "Medical Mandala", "description": "Symmetrical mandala with pills, bandages, and hearts", "type": "mandala"},
+    {"page": 10, "title": "Heroes Wear Scrubs", "description": "Bold lettering with cape and medical symbols", "type": "quote"},
+    {"page": 11, "title": "Garden of Healing", "description": "Peaceful garden scene with medicinal herbs", "type": "scene"},
+    {"page": 12, "title": "Nurse Life Pattern", "description": "Repeating pattern of nursing items and symbols", "type": "pattern"},
+    {"page": 13, "title": "Breathe", "description": "Calming word art with flowing air and leaf designs", "type": "quote"},
+    {"page": 14, "title": "Caring Heart", "description": "Large decorative heart filled with intricate patterns", "type": "mandala"},
+    {"page": 15, "title": "Tea Time", "description": "Cozy tea set with cookies and flowers", "type": "scene"},
+    {"page": 16, "title": "Butterfly Transformation", "description": "Butterflies emerging from medical symbols", "type": "pattern"},
+    {"page": 17, "title": "You Make a Difference", "description": "Uplifting quote with sunburst design", "type": "quote"},
+    {"page": 18, "title": "Peaceful Pond", "description": "Serene water scene with lotus flowers", "type": "scene"},
+    {"page": 19, "title": "Nurse Badge Mandala", "description": "Circular design around a nurse ID badge", "type": "mandala"},
+    {"page": 20, "title": "Comfort & Care", "description": "Warm blanket pattern with hearts", "type": "pattern"},
+    {"page": 21, "title": "Sunrise Hope", "description": "Beautiful sunrise over hospital silhouette", "type": "scene"},
+    {"page": 22, "title": "Strength in Kindness", "description": "Decorative lettering with ribbon design", "type": "quote"},
+    {"page": 23, "title": "Floral Scrub Cap", "description": "Detailed scrub cap covered in flower patterns", "type": "pattern"},
+    {"page": 24, "title": "Zen Garden", "description": "Japanese zen garden with stones and raked sand", "type": "scene"},
+    {"page": 25, "title": "Heartbeat Flowers", "description": "EKG line blooming into various flowers", "type": "pattern"},
+    {"page": 26, "title": "Rest & Recharge", "description": "Cozy bedroom scene with plants and books", "type": "scene"},
+    {"page": 27, "title": "Compassion Mandala", "description": "Intricate mandala with hands and hearts", "type": "mandala"},
+    {"page": 28, "title": "One Day at a Time", "description": "Calendar page with floral decorations", "type": "quote"},
+    {"page": 29, "title": "Healing Garden", "description": "Greenhouse full of medicinal plants", "type": "scene"},
+    {"page": 30, "title": "Thank You Nurses", "description": "Celebratory design with confetti and hearts", "type": "pattern"}
+  ]
+}'''
+
+    def _generate_coloring_prompts(self) -> str:
+        return '''{
+  "cover_prompt": "Colorful illustrated book cover for nurses coloring book, warm and inviting design with stethoscope, hearts, and flowers, professional yet caring aesthetic, title space at top",
+  "pages": [
+    {"page": 1, "prompt": "Black and white line art, coloring book page, intricate design of two caring hands with detailed floral and vine patterns flowing around them, clean outlines, white background, no shading"},
+    {"page": 2, "prompt": "Black and white line art, coloring book page, mandala design with stethoscope forming the center, surrounded by medical crosses, hearts, and geometric patterns, symmetrical, white background"},
+    {"page": 3, "prompt": "Black and white line art, coloring book page, cozy coffee cup with decorative steam swirls, surrounded by pastries and small flowers, detailed line work, white background"},
+    {"page": 4, "prompt": "Black and white line art, coloring book page, decorative hand lettering saying You Are Appreciated surrounded by roses and leaves, ornate border, white background"},
+    {"page": 5, "prompt": "Black and white line art, coloring book page, night sky pattern with crescent moon, detailed stars, and swirling clouds, dreamy design, white background"},
+    {"page": 6, "prompt": "Black and white line art, coloring book page, nurse scrubs top decorated with detailed botanical flower patterns, buttons and pockets visible, white background"},
+    {"page": 7, "prompt": "Black and white line art, coloring book page, creative EKG heartbeat line that transforms into blooming flowers and vines, flowing design, white background"},
+    {"page": 8, "prompt": "Black and white line art, coloring book page, relaxing bath scene with clawfoot tub, candles, potted plants, and bubbles, peaceful atmosphere, white background"},
+    {"page": 9, "prompt": "Black and white line art, coloring book page, symmetrical mandala incorporating pills, bandages, medical crosses, and hearts in geometric pattern, white background"},
+    {"page": 10, "prompt": "Black and white line art, coloring book page, bold decorative lettering Heroes Wear Scrubs with flowing cape design and small medical symbols, white background"},
+    {"page": 11, "prompt": "Black and white line art, coloring book page, peaceful garden scene with labeled medicinal herbs like lavender, chamomile, and mint, detailed botanical style, white background"},
+    {"page": 12, "prompt": "Black and white line art, coloring book page, seamless repeating pattern of nursing items: stethoscopes, syringes, bandages, hearts, pills, white background"},
+    {"page": 13, "prompt": "Black and white line art, coloring book page, the word BREATHE in decorative lettering with flowing air swirls and delicate leaves, calming design, white background"},
+    {"page": 14, "prompt": "Black and white line art, coloring book page, large decorative heart shape filled with intricate zentangle patterns, swirls and geometric designs, white background"},
+    {"page": 15, "prompt": "Black and white line art, coloring book page, detailed tea set with teapot, cups, cookies on plate, and small flowers, cozy scene, white background"},
+    {"page": 16, "prompt": "Black and white line art, coloring book page, butterflies with detailed wing patterns emerging from and flying around medical symbols, transformation theme, white background"},
+    {"page": 17, "prompt": "Black and white line art, coloring book page, You Make a Difference in decorative script with radiating sunburst lines and small stars, white background"},
+    {"page": 18, "prompt": "Black and white line art, coloring book page, serene pond scene with detailed lotus flowers, lily pads, and gentle ripples, peaceful design, white background"},
+    {"page": 19, "prompt": "Black and white line art, coloring book page, circular mandala design with nurse ID badge at center, surrounded by symmetrical patterns and medical symbols, white background"},
+    {"page": 20, "prompt": "Black and white line art, coloring book page, cozy knitted blanket pattern with hearts and geometric designs, warm and comforting, white background"},
+    {"page": 21, "prompt": "Black and white line art, coloring book page, beautiful sunrise with detailed rays over hospital building silhouette, hopeful scene, white background"},
+    {"page": 22, "prompt": "Black and white line art, coloring book page, Strength in Kindness in elegant lettering with flowing ribbon design and small flowers, white background"},
+    {"page": 23, "prompt": "Black and white line art, coloring book page, detailed surgical scrub cap covered in various flower patterns, roses, daisies, and leaves, white background"},
+    {"page": 24, "prompt": "Black and white line art, coloring book page, Japanese zen garden with carefully placed stones, raked sand patterns, and small bridge, peaceful, white background"},
+    {"page": 25, "prompt": "Black and white line art, coloring book page, EKG heartbeat line that blooms into various detailed flowers: roses, tulips, daisies, flowing design, white background"},
+    {"page": 26, "prompt": "Black and white line art, coloring book page, cozy bedroom scene with bed, nightstand, potted plants, books, and window with curtains, restful, white background"},
+    {"page": 27, "prompt": "Black and white line art, coloring book page, intricate mandala with caring hands reaching toward center, surrounded by hearts and flowing patterns, white background"},
+    {"page": 28, "prompt": "Black and white line art, coloring book page, One Day at a Time in decorative lettering on calendar page design with floral corner decorations, white background"},
+    {"page": 29, "prompt": "Black and white line art, coloring book page, greenhouse interior full of potted medicinal plants and herbs, detailed botanical illustration style, white background"},
+    {"page": 30, "prompt": "Black and white line art, coloring book page, Thank You Nurses in celebratory lettering with confetti, hearts, stars, and ribbon decorations, white background"}
+  ]
+}'''
     
     def _generate_story(self) -> str:
         return '''{
