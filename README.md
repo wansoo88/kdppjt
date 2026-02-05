@@ -152,3 +152,14 @@ kdppjt/
 ## License
 
 MIT
+
+
+story_writer.py - 3단계 스토리 작성 시스템
+
+초고 작성 (문장 다양성, 감정 깊이)
+1차 편집 (문법, 흐름)
+최종 편집 (프로 품질, 일관성)
+이미지 프롬프트 자동 생성
+사용법:
+
+python story_writer.py --book books/my-story --topic "A brave rabbit discovers a magical garden" --backend ollama
