@@ -1,45 +1,52 @@
 # ──────────────────────────────────────────────────
-# KDP 파이프라인 입력 설정
-# python scripts/start_pipeline.py --config config/book_config.yaml
+# KDP Local Pipeline Configuration
+# python run.py --config config/book_config.yaml
+# python run.py --config config/book_config.yaml --mock  # Test mode
 # ──────────────────────────────────────────────────
 
 book:
   id: "book-001"
-  title: "AWS 클라우드 아키텍트의 완전한 가이드"
+  title: "The Complete Guide to AWS Cloud Architecture"
   author: "Kim, Woo-sung"
-  topic: "AWS 클라우드 아키텍처 설계 패턴과 실제 구현 사례"
+  topic: "AWS cloud architecture design patterns and practical implementation"
   genre: "technology"
-  language: "ko"
+  language: "en"
+  
+  # LLM backend: ollama (free) | claude (paid) | mock (test)
+  llm_backend: "ollama"
+  
+  # Image backend: stable_diffusion (free) | mock (test)
+  image_backend: "stable_diffusion"
 
   cover:
     style: "modern minimalist"
 
   metadata:
     description: >
-      AWS 클라우드 서비스를 활용한 현대적 아키텍처 설계 패턴을
-      체계적으로 다루는 종합 가이드. IAM부터 서버러스까지 실무 중심.
+      A comprehensive guide covering modern architecture design patterns
+      using AWS cloud services. From IAM to serverless, practical focused.
     keywords:
       - "AWS"
-      - "클라우드"
-      - "아키텍처"
-      - "설계 패턴"
+      - "Cloud"
+      - "Architecture"
+      - "Design Patterns"
       - "DevOps"
     categories:
       - "Computers"
       - "Amazon Web Services"
     price: "19.99"
 
-  # 빈 값이면 AI가 자동 생성
+  # Table of contents (empty = AI auto-generates)
   outline: |
-    1. AWS 기본 개념 및 글로벌 인프라
-    2. IAM과 보안 모델
-    3. EC2와 컴퓨트 서비스
-    4. S3와 저장소 아키텍처
-    5. VPC와 네트워킹 설계
-    6. RDS와 데이터베이스 전략
-    7. Lambda와 서버러스 아키텍처
-    8. CI/CD와 배포 파이프라인
-    9. 모니터링과 관찰 가능성
-    10. 비용 최적화 전략
-    11. 실제 프로젝트 — E-Commerce 플랫폼
-    12. 마이크로서비스와 컨테이너 전략
+    1. AWS Fundamentals and Global Infrastructure
+    2. IAM and Security Model
+    3. EC2 and Compute Services
+    4. S3 and Storage Architecture
+    5. VPC and Network Design
+    6. RDS and Database Strategy
+    7. Lambda and Serverless Architecture
+    8. CI/CD and Deployment Pipeline
+    9. Monitoring and Observability
+    10. Cost Optimization Strategy
+    11. Real Project - E-Commerce Platform
+    12. Microservices and Container Strategy
